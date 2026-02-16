@@ -8,17 +8,14 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 public class HomePage extends BasePage {
     public HomePage(WebDriver driver) {
-        super ();
-    }
-
-    public void HomePage(WebDriver driver) {
         setDriver (driver);
         driver.get ("https://telranedu.web.app/home");
-        PageFactory.initElements (new AjaxElementLocatorFactory (driver, 10), this);
-
+        //driver.get(PropertiesReader.getProperty("base.properties", "baseUrl"));
+        PageFactory.initElements (new AjaxElementLocatorFactory
+                (driver, 10), this);
     }
 
-    @FindBy (xpath="//a[text()'LOGIN'])")
+    @FindBy (css="a[href='/login']")
     WebElement btnLogin;
 
     public void clickBtnLogin() {
