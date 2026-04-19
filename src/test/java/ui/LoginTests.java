@@ -10,10 +10,11 @@ import pages.BasePage;
 import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
+import utils.RetryAnalyser;
 
 public class LoginTests extends AppManager {
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyser.class)
     public void loginPositive() {
         HomePage homePage = new HomePage (getDriver ());
         homePage.clickBtnLogin ();
@@ -42,8 +43,9 @@ public class LoginTests extends AppManager {
         Assert.assertTrue (contactPage.isTextSignOutPresent ("Sign Out"));
 
     }
+
     @Test
-    public void loginNegativeTestsWrongEmail(){
+    public void loginNegativeTestsWrongEmail() {
         User user = User.builder ()
                 .username ("karina2mail.com")
                 .password ("Karina29!$")
@@ -54,10 +56,11 @@ public class LoginTests extends AppManager {
         LoginPage loginPage = new LoginPage (getDriver ());
         loginPage.typeLoginRegisUser (user);
         loginPage.clickBtnLoginForm ();
-        Assert.assertEquals (loginPage.closeAlertReturnText (),"Wrong email or password");
+        Assert.assertEquals (loginPage.closeAlertReturnText (), "Wrong email or password");
     }
+
     @Test
-    public void loginNegativeTestsWrongPassword(){
+    public void loginNegativeTestsWrongPassword() {
         User user = User.builder ()
                 .username ("karina292002@gmail.com")
                 .password ("Karina")
@@ -68,7 +71,7 @@ public class LoginTests extends AppManager {
         LoginPage loginPage = new LoginPage (getDriver ());
         loginPage.typeLoginRegisUser (user);
         loginPage.clickBtnLoginForm ();
-        Assert.assertEquals (loginPage.closeAlertReturnText (),"Wrong email or password");
+        Assert.assertEquals (loginPage.closeAlertReturnText (), "Wrong email or password");
 
     }
 

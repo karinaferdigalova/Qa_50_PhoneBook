@@ -16,17 +16,17 @@ public class AppManager {
 
     @BeforeMethod
     public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver = new ChromeDriver ();
+        driver.manage ().window ().maximize ();
+        driver.manage ().timeouts ().pageLoadTimeout (Duration.ofSeconds (10));
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     // (@BeforeMethod) setup --> (@Test) testName -->(@AfterMethod) tearDown
 
-    @AfterMethod(enabled = false)
+    @AfterMethod ()
     public void tearDown() {
         if (driver != null)
-            driver.quit();
+            driver.quit ();
     }
 }
