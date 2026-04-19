@@ -16,7 +16,7 @@ build/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-scr/test/properties
+src/test/properties
 
 ### Eclipse ###
 .apt_generated
