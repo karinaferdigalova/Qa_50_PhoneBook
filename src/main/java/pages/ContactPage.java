@@ -1,8 +1,11 @@
 package pages;
 
 import dto.Contact;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.WheelInput;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
@@ -27,6 +30,19 @@ public class ContactPage extends BasePage {
     List<WebElement> contactList;
     @FindBy (xpath="//div[@class='contact-item_card__2SOIM'][last()]")
     WebElement lastContact;
+    @FindBy (xpath="//div[@class='contact-page_leftdiv__yhyke']/div")
+    WebElement divListContactsl;
+
+    public void scrollToLastContact() {
+        Actions actions = new Actions (driver);
+        actions.scrollToElement (lastContact).perform ();
+        //perform - выполнение
+        int deltaY = divListContactsl.getSize ().getHeight ();
+        System.out.println ("Height ->" + deltaY);
+        WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement (contactList.get (0));
+        pause (3);
+        actions.scrollFromOrigin (scrollOrigin, 0, deltaY).perform ();
+    }
 
     public boolean isContactPresent(Contact contact) {
         for (WebElement element : contactList) {

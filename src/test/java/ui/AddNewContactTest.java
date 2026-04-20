@@ -46,4 +46,11 @@ public class AddNewContactTest extends AppManager {
         //contactPage.clickLastContact();
         Assert.assertTrue (contactPage.isContactPresent (contact));
     }
+    @Test
+    public void scrollToLastContact() {
+        Contact contact = positiveContact ();
+        addPage.typeContactForm (contact);
+        contactPage.scrollToLastContact ();
+
+    }
 }
