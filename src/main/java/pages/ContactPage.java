@@ -31,13 +31,19 @@ public class ContactPage extends BasePage {
     @FindBy (xpath="//div[@class='contact-item_card__2SOIM'][last()]")
     WebElement lastContact;
     @FindBy (xpath="//div[@class='contact-page_leftdiv__yhyke']/div")
-    WebElement divListContactsl;
+    WebElement divListContacts;
+    @FindBy (xpath="//div[@class='contact-item-detailed_card__50dTS']")
+    WebElement itemDetailCard;
+
+    public String getTextFromContact() {
+        return itemDetailCard.getText ();
+    }
 
     public void scrollToLastContact() {
         Actions actions = new Actions (driver);
         actions.scrollToElement (lastContact).perform ();
         //perform - выполнение
-        int deltaY = divListContactsl.getSize ().getHeight ();
+        int deltaY = divListContacts.getSize ().getHeight ();
         System.out.println ("Height ->" + deltaY);
         WheelInput.ScrollOrigin scrollOrigin = WheelInput.ScrollOrigin.fromElement (contactList.get (0));
         pause (3);
@@ -46,7 +52,8 @@ public class ContactPage extends BasePage {
 
     public boolean isContactPresent(Contact contact) {
         for (WebElement element : contactList) {
-            if (element.getText ().contains (contact.getName ()) && element.getText ().contains (contact.getPhone ())) {
+            if (element.getText ().contains (contact.getName ())
+                    && element.getText ().contains (contact.getPhone ())) {
                 System.out.println (element.getText ());
                 return true;
             }
