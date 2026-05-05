@@ -31,6 +31,16 @@ public class AddPage extends BasePage {
     @FindBy (xpath="//b[text()='Save']")
     WebElement btnSave;
 
+    public boolean isButtonSaveDisabled() {
+        try {
+            btnSave.click ();
+            return false; // если клик прошёл — кнопка кликабельна
+        } catch (Exception e) {
+            return true; // если ошибка — кнопка не кликабельна
+        }
+    }
+
+
     public void typeContactForm(Contact contact) {
         inputName.sendKeys (contact.getName ());
         inputLastName.sendKeys (contact.getLastName ());

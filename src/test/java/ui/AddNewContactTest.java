@@ -66,10 +66,24 @@ public class AddNewContactTest extends AppManager {
                 "validate Phone in DetailCard");
         softAssert.assertAll ();
     }
-    @Test (dataProvider="dataProviderFile", dataProviderClass=ContactDataProvider.class)
+    @Test (dataProvider="dataProviderFile",
+            dataProviderClass=ContactDataProvider.class)
     public void addNewContactPositive_withDataProvider(Contact contact) {
         addPage.typeContactForm (contact);
         //contactPage.clickLastContact();
         Assert.assertTrue (contactPage.isContactPresent (contact));
+    }
+    @Test (dataProvider="dataProviderFileWrongNumber",
+            dataProviderClass=ContactDataProvider.class)
+    public void dataProviderFileWrongNumber(Contact contact) {
+        addPage.typeContactForm (contact);
+        Assert.assertTrue (addPage.closeAlertReturnText ().contains ("Phone not valid:"));
+
+    }
+    @Test (dataProvider="dataProviderEmptyFields",
+            dataProviderClass=ContactDataProvider.class)
+    public void dataProviderEmptyFields(Contact contact) {
+        addPage.typeContactForm (contact);
+        Assert.assertFalse (addPage.isButtonSaveDisabled ());
     }
 }
